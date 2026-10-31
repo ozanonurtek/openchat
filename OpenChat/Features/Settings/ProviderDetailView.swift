@@ -39,7 +39,12 @@ struct ProviderDetailView: View {
                 )
             }
 
-            CustomHeadersEditor(headers: $headerEntries)
+            if !provider.usesLocalInference {
+                CustomHeadersEditor(
+                    headers: $headerEntries,
+                    startsExpanded: !provider.customHeaders.isEmpty
+                )
+            }
 
             if providerStore.supportsBalance(for: provider) {
                 balanceSection
